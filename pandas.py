@@ -17,57 +17,56 @@ import numpy as np
 import matplotlib.pyplot as plt
 import pandas as pd
 
-dataset = pd.read_csv('Data.csv')
-X = dataset.iloc[:, :-1].values
-y = dataset.iloc[:, 3].values
-
-
-#total number of rows and columns
-dataset.shape   
-
-#if you want to see last few rows then use tail command (default last 5 rows will print)
-dataset.tail() 
-
-#slicing
-dataset[2:5]
-
-dataset.info()
-
-dataset.columns
-dataset.index
-
-#priting particular column data 
-dataset.column
-dataset['column'] #dataset.column (both are same)
-dataset[['column1', 'column2']] #getting two or more column at once 
-
-
-
-dataset['column'].max()
-dataset['column'].min() 
-dataset['column'].describe()
-dataset['column'].mean()
-dataset['column'].std()
-dataset['column'].median()
-dataset['column'].quantile(q) # q ~ 0 / 1 
-dataset['column'].unique()
-
-# select rows which has maximum value
-dataset[dataset.column == dataset.column.max()] 
-
+df = pd.read_csv('Data.csv')
+X = df.iloc[:, :-1].values
+y = df.iloc[:, 3].values
 
 ##################################################################################################
-#Pandas series 
+"""Basic Operations"""
 
-data = dataset['coloumn']
+df.info() #basic info 
+
+df.shape   #total number of rows and columns
+
+df.tail() #if you want to see last few rows then use tail command (default last 5 rows will print)
+
+df[2:5] 
+
+df.columns #names of columns as a list  
+
+df.index 
+
+df.column #priting particular column data 
+df['column'] #df.column (both are same) It returns pandas.core.series.Series type
+df[['column']] #It returns pandas.core.frame.DataFrame
+df[['column1', 'column2']] #getting two or more column at once 
+df['column'].max()
+df['column'].min() 
+df['column'].describe()
+df['column'].mean()
+df['column'].std()
+df['column'].median()
+df['column'].quantile(q) # q ~ 0 / 1 
+df['column'].unique()
+
+df[df.column == df.column.max()]  #select rows which has maximum value
+
+df['salt']['Jan']#Indexing using square brackets
+df.eggs['Mar'] #Using column a!ribute and row label
+df.loc['May', 'spam'] #here may and spam are row and columns and as it's name it's loc
+df.iloc[4, 2] #same thing as above but numbers
+
+##################################################################################################
+"""Pandas Series"""
+
+data = df['coloumn']
 type(data) # pandas.core.series.Series
 newNumpyData = data.values #converts Series into Numpy array
 
 users['fees'] = 0 # Broadcasts to entire column
 
-
 ##################################################################################################
-#Building DataFrames
+"""Building DataFrames"""
 
 #method 1
 data = {'weekday': ['Sun', 'Sun', 'Mon', 'Mon'],
@@ -94,11 +93,13 @@ users = pd.DataFrame(data)
 #writing DataFrames
 
 data.to_csv('output.csv')
+
 ##################################################################################################
 #Plotting DataFrames
 
 data.plot(x='xaxis',y='yaxis',kind='scatter',bins=30, range=(4,8), normed=True) #kind='box' kind='hist' 
 plt.show()
+
 
 ##################################################################################################
 #Time Series 
@@ -122,7 +123,5 @@ data.loc['2015-2-16':'2015-2-20']
 data.reindex(evening_2_11, method='ffill') #method='bfill'
 
 daily_mean = data.resample('D').mean()
-
-
 
 ##################################################################################################
