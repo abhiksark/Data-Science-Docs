@@ -5,7 +5,7 @@ Created on Wed Dec 18 17:27:56 2017
 
 @author: abhik
 
-Basics functions for handeling pandas
+Basics functions for Handeling pandas
 
 (DataPreprocessing)
 
@@ -21,6 +21,19 @@ df = pd.read_csv('Data.csv')
 X = df.iloc[:, :-1].values
 y = df.iloc[:, 3].values
 
+
+
+
+##################################################################################################
+"""Preprocessing"""
+df.isna().sum() #counting missing data 
+df.notnull().all() #removing all the not nulls
+df.dropna(how='any') #using any startegy
+#if in the dataframe can interpolate using this script and spline = polynomial
+df = df.interpolate(method='spline', order=2)
+
+from pandas.plotting import bootstrap_plot
+bootstrap_plot(data, size=50, samples=500, color='grey')
 ##################################################################################################
 """Basic Operations"""
 
@@ -55,15 +68,42 @@ df['salt']['Jan']#Indexing using square brackets
 df.eggs['Mar'] #Using column a!ribute and row label
 df.loc['May', 'spam'] #here may and spam are row and columns and as it's name it's loc
 df.iloc[4, 2] #same thing as above but numbers
+pd.merge(df1, df2, on="movie_title")
 
 ##################################################################################################
 """Pandas Series"""
+
+"""
+pandas Data Structures
+Key building blocks
+● Indexes: Sequence of labels
+● Series: 1D array with Index
+● DataFrames: 2D array with Series as columns
+
+"""
+prices = [10.70, 10.86, 10.74, 10.71, 10.79]
+shares = pd.Series(prices)
+print(shares)
+"""
+Output
+0    10.70
+1    10.86
+2    10.74
+3    10.71
+4    10.79 
+"""
 
 data = df['coloumn']
 type(data) # pandas.core.series.Series
 newNumpyData = data.values #converts Series into Numpy array
 
-users['fees'] = 0 # Broadcasts to entire column
+users['fees'] = 0 #Broadcasts to entire column
+df.salt > 60 #creates a boolean series
+df[df.salt > 60] #Filtering with a Boolean Series
+df.eggs[df.salt > 55] += 5  #Modifying a column based on another
+df.apply(fun) #apply a func. Where func is passed as parameter
+df.apply(lambda n: n//12)
+df.map(df1) #mapping dataframe from df to df1
 
 ##################################################################################################
 """Building DataFrames"""
@@ -90,27 +130,24 @@ data = dict(zipped)
 users = pd.DataFrame(data)
 
 ##################################################################################################
-#writing DataFrames
+"""Writing DataFrames"""
 
 data.to_csv('output.csv')
 
 ##################################################################################################
-#Plotting DataFrames
+"""Plotting DataFrames"""
 
 data.plot(x='xaxis',y='yaxis',kind='scatter',bins=30, range=(4,8), normed=True) #kind='box' kind='hist' 
 plt.show()
 
 
 ##################################################################################################
-#Time Series 
+"""Time Series"""
 
 """ISO 8601 format :: yyyy-mm-dd hh:mm:ss """
 
 #parse dates 
 data = pd.read_csv('data.csv', parse_dates=True, index_col= 'Date')
-
-#strings to datetime
-
 
 #Selecting single datetime
 data.loc['2015-02-19 11:00:00']
