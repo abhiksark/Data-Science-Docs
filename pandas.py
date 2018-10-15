@@ -32,14 +32,14 @@ df.dropna(how='any') #using any startegy
 #if in the dataframe can interpolate using this script and spline = polynomial
 df = df.interpolate(method='spline', order=2)
 
-from pandas.plotting import bootstrap_plot
-bootstrap_plot(data, size=50, samples=500, color='grey')
+
 ##################################################################################################
 """Basic Operations"""
 
 df.info() #basic info 
 
 df.shape   #total number of rows and columns
+df.dtypes #this returns the datatypes of the columns
 
 df.tail() #if you want to see last few rows then use tail command (default last 5 rows will print)
 
@@ -48,6 +48,7 @@ df[2:5]
 df.columns #names of columns as a list  
 
 df.index 
+
 
 df.column #priting particular column data 
 df['column'] #df.column (both are same) It returns pandas.core.series.Series type
@@ -61,6 +62,8 @@ df['column'].std()
 df['column'].median()
 df['column'].quantile(q) # q ~ 0 / 1 
 df['column'].unique()
+df.nunique() # this returns the number of unique values in each column
+
 
 df[df.column == df.column.max()]  #select rows which has maximum value
 
@@ -118,6 +121,11 @@ data = {'weekday': ['Sun', 'Sun', 'Mon', 'Mon'],
 
 users = pd.DataFrame(data)
 
+
+
+data.reset_index(drop=True, inplace=True)
+
+
 #method 2
 cities = ['Austin', 'Dallas', 'Austin', 'Dallas']
 signups = [7, 12, 3, 5]
@@ -140,6 +148,9 @@ data.to_csv('output.csv')
 data.plot(x='xaxis',y='yaxis',kind='scatter',bins=30, range=(4,8), normed=True) #kind='box' kind='hist' 
 plt.show()
 
+
+from pandas.plotting import bootstrap_plot
+bootstrap_plot(data, size=50, samples=500, color='grey')
 
 ##################################################################################################
 """Time Series"""

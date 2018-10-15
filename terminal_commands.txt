@@ -21,6 +21,21 @@ anaconda commands
 
 #########################################################################################################
 
+conda search '*beautifulsoup*'
+conda create -n my_env numpy
+conda create -n py3 python=3 
+source activate my_env
+conda list
+source deactivate
+conda env export > environment.yaml
+conda env export
+
+To create an environment from an environment file 
+conda env create -f environment.yaml
+conda env remove -n env_name
+
+#########################################################################################################
+
 
 #########################################################################################################
 
