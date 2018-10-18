@@ -7,7 +7,7 @@ Created on Wed Dec 18 17:27:56 2017
 
 Basics functions for Handeling pandas
 
-(DataPreprocessing)
+(Data Preprocessing)
 
 """
 
@@ -31,8 +31,13 @@ df.notnull().all() #removing all the not nulls
 df.dropna(how='any') #using any startegy
 #if in the dataframe can interpolate using this script and spline = polynomial
 df = df.interpolate(method='spline', order=2)
+mean = df['coloumn'].mean()
+df['coloumn'].fillna(mean,inplace= True)
 
+df.duplicated() #finding duplicates
+df.drop_duplicates(inplace=True) #removing duplicates as well
 
+#we should always convert datetime to datetime object rather than string
 ##################################################################################################
 """Basic Operations"""
 
@@ -112,18 +117,18 @@ df.map(df1) #mapping dataframe from df to df1
 """Building DataFrames"""
 
 #method 1
-data = {'weekday': ['Sun', 'Sun', 'Mon', 'Mon'],
+df = {'weekday': ['Sun', 'Sun', 'Mon', 'Mon'],
 'city': ['Austin', 'Dallas', 'Austin', 'Dallas'],
 'visitors': [139, 237, 326, 456],
 'signups': [7, 12, 3, 5] 
 }
 
 
-users = pd.DataFrame(data)
+users = pd.DataFrame(df)
 
 
 
-data.reset_index(drop=True, inplace=True)
+df.reset_index(drop=True, inplace=True)
 
 
 #method 2
@@ -134,23 +139,26 @@ visitors = [139, 237, 326, 456]
 list_labels = ['city', 'signups', 'visitors', 'weekday']
 list_cols = [cities, signups, visitors, weekdays]
 zipped = list(zip(list_labels, list_cols))
-data = dict(zipped)
-users = pd.DataFrame(data)
+df = dict(zipped)
+users = pd.DataFrame(df)
 
 ##################################################################################################
 """Writing DataFrames"""
 
-data.to_csv('output.csv')
+df.to_csv('output.csv')
 
 ##################################################################################################
 """Plotting DataFrames"""
+""" These are wrapper over matplotlib so we can use it interchangebly"""
 
-data.plot(x='xaxis',y='yaxis',kind='scatter',bins=30, range=(4,8), normed=True) #kind='box' kind='hist' 
+
+df.hist() #for histogram 
+df.plot(x='xaxis',y='yaxis',kind='scatter',bins=30, range=(4,8), normed=True) #kind='box' kind='hist' 
 plt.show()
 
 
 from pandas.plotting import bootstrap_plot
-bootstrap_plot(data, size=50, samples=500, color='grey')
+bootstrap_plot(df, size=50, samples=500, color='grey')
 
 ##################################################################################################
 """Time Series"""
@@ -158,18 +166,18 @@ bootstrap_plot(data, size=50, samples=500, color='grey')
 """ISO 8601 format :: yyyy-mm-dd hh:mm:ss """
 
 #parse dates 
-data = pd.read_csv('data.csv', parse_dates=True, index_col= 'Date')
+df = pd.read_csv('df.csv', parse_dates=True, index_col= 'Date')
 
 #Selecting single datetime
-data.loc['2015-02-19 11:00:00']
+df.loc['2015-02-19 11:00:00']
 #Selecting whole day
-data.loc['2015-2-5']
+df.loc['2015-2-5']
 #Slicing using dates/times
-data.loc['2015-2-16':'2015-2-20']
+df.loc['2015-2-16':'2015-2-20']
 
 #Filling missing values 
-data.reindex(evening_2_11, method='ffill') #method='bfill'
+df.reindex(evening_2_11, method='ffill') #method='bfill'
 
-daily_mean = data.resample('D').mean()
+daily_mean = df.resample('D').mean()
 
 ##################################################################################################
