@@ -78,6 +78,11 @@ df.loc['May', 'spam'] #here may and spam are row and columns and as it's name it
 df.iloc[4, 2] #same thing as above but numbers
 pd.merge(df1, df2, on="movie_title")
 
+
+data.groupby(['col1', 'col2'])['col3'].mean() #important thing
+
+df_a = df.query('income == " >50K"') #life saviour
+
 ##################################################################################################
 """Pandas Series"""
 
@@ -142,6 +147,11 @@ zipped = list(zip(list_labels, list_cols))
 df = dict(zipped)
 users = pd.DataFrame(df)
 
+
+df.append(df2)
+
+df.rename(index=str, columns={"A": "a", "C": "c"})
+
 ##################################################################################################
 """Writing DataFrames"""
 
@@ -156,6 +166,8 @@ df.hist() #for histogram
 df.plot(x='xaxis',y='yaxis',kind='scatter',bins=30, range=(4,8), normed=True) #kind='box' kind='hist' 
 plt.show()
 
+df['class'].value_counts().plot(kind = 'pie')
+pd.plotting.scatter_matrix(df)
 
 from pandas.plotting import bootstrap_plot
 bootstrap_plot(df, size=50, samples=500, color='grey')
