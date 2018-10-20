@@ -37,6 +37,11 @@ df['coloumn'].fillna(mean,inplace= True)
 df.duplicated() #finding duplicates
 df.drop_duplicates(inplace=True) #removing duplicates as well
 
+df.rename(columns=lambda x: x.strip().lower().replace(" ", "_"), inplace=True) # replace spaces with underscores and lowercase labels Snake case hiss hiss..
+
+
+
+
 #we should always convert datetime to datetime object rather than string
 ##################################################################################################
 """Basic Operations"""
@@ -79,7 +84,7 @@ df.iloc[4, 2] #same thing as above but numbers
 pd.merge(df1, df2, on="movie_title")
 
 
-data.groupby(['col1', 'col2'])['col3'].mean() #important thing
+df.groupby(['col1', 'col2'])['col3'].mean() #important thing
 
 df_a = df.query('income == " >50K"') #life saviour
 
@@ -117,6 +122,12 @@ df.eggs[df.salt > 55] += 5  #Modifying a column based on another
 df.apply(fun) #apply a func. Where func is passed as parameter
 df.apply(lambda n: n//12)
 df.map(df1) #mapping dataframe from df to df1
+
+
+##################################################################################################
+"""Strings"""
+
+df['B'].str.extract('(\d+)').astype(int)
 
 ##################################################################################################
 """Building DataFrames"""
