@@ -129,6 +129,9 @@ df.map(df1) #mapping dataframe from df to df1
 
 df['B'].str.extract('(\d+)').astype(int)
 
+# First, let's get all the hybrids in 2008
+hb_08 = df_08[df_08['fuel'].str.contains('/')]
+
 ##################################################################################################
 """Building DataFrames"""
 
@@ -182,6 +185,48 @@ pd.plotting.scatter_matrix(df)
 
 from pandas.plotting import bootstrap_plot
 bootstrap_plot(df, size=50, samples=500, color='grey')
+
+
+names = ['preg', 'plas', 'pres', 'skin', 'test', 'mass', 'pedi', 'age', 'class']
+data = pandas.read_csv(url, names=names)
+data.hist()
+plt.show()
+
+
+#Density Plots
+names = ['preg', 'plas', 'pres', 'skin', 'test', 'mass', 'pedi', 'age', 'class']
+data = pandas.read_csv(url, names=names)
+data.plot(kind='density', subplots=True, layout=(3,3), sharex=False)
+plt.show()
+
+#box and whiskers
+names = ['preg', 'plas', 'pres', 'skin', 'test', 'mass', 'pedi', 'age', 'class']
+data = pandas.read_csv(url, names=names)
+data.plot(kind='box', subplots=True, layout=(3,3), sharex=False, sharey=False)
+plt.show()
+
+#Correlation Matrix Plot
+names = ['preg', 'plas', 'pres', 'skin', 'test', 'mass', 'pedi', 'age', 'class']
+data = pandas.read_csv(url, names=names)
+correlations = data.corr()
+# plot correlation matrix
+fig = plt.figure()
+ax = fig.add_subplot(111)
+cax = ax.matshow(correlations, vmin=-1, vmax=1)
+fig.colorbar(cax)
+ticks = numpy.arange(0,9,1)
+ax.set_xticks(ticks)
+ax.set_yticks(ticks)
+ax.set_xticklabels(names)
+ax.set_yticklabels(names)
+plt.show()
+
+
+#Scatterplot Matrix
+names = ['preg', 'plas', 'pres', 'skin', 'test', 'mass', 'pedi', 'age', 'class']
+data = pandas.read_csv(url, names=names)
+scatter_matrix(data)
+plt.show()
 
 ##################################################################################################
 """Time Series"""
