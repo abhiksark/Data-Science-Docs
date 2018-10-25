@@ -39,9 +39,6 @@ df.drop_duplicates(inplace=True) #removing duplicates as well
 
 df.rename(columns=lambda x: x.strip().lower().replace(" ", "_"), inplace=True) # replace spaces with underscores and lowercase labels Snake case hiss hiss..
 
-
-
-
 #we should always convert datetime to datetime object rather than string
 ##################################################################################################
 """Basic Operations"""
@@ -85,6 +82,10 @@ pd.merge(df1, df2, on="movie_title")
 
 
 df.groupby(['col1', 'col2'])['col3'].mean() #important thing
+df.loc[df['column_name'] == some_value]
+df.loc[df['column_name'].isin(some_values)] #To select rows whose column value is in an iterable, some_values, use isin:
+df.loc[~df['column_name'].isin(some_values)] #isin returns a boolean Series, so to select rows whose value is not in some_values, negate the boolean Series using ~:
+
 
 df_a = df.query('income == " >50K"') #life saviour
 
@@ -142,9 +143,7 @@ df = {'weekday': ['Sun', 'Sun', 'Mon', 'Mon'],
 'signups': [7, 12, 3, 5] 
 }
 
-
 users = pd.DataFrame(df)
-
 
 
 df.reset_index(drop=True, inplace=True)
