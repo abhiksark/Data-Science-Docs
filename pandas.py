@@ -88,6 +88,7 @@ df.loc[~df['column_name'].isin(some_values)] #isin returns a boolean Series, so 
 
 
 df_a = df.query('income == " >50K"') #life saviour
+df_sample = df.sample(200)
 
 ##################################################################################################
 """Pandas Series"""
