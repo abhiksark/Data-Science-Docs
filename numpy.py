@@ -16,6 +16,8 @@ import matplotlib.pyplot as plt
 import pandas as pd
 
 a = np.array([0, 1, 2, 3])
+a.tolist() #numpy array to list
+
 
 a.ndim
 

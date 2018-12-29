@@ -57,7 +57,6 @@ df.columns #names of columns as a list
 df.index 
 
 
-df.column #priting particular column data 
 df['column'] #df.column (both are same) It returns pandas.core.series.Series type
 df[['column']] #It returns pandas.core.frame.DataFrame
 df[['column1', 'column2']] #getting two or more column at once 
@@ -133,6 +132,7 @@ df['B'].str.extract('(\d+)').astype(int)
 
 # First, let's get all the hybrids in 2008
 hb_08 = df_08[df_08['fuel'].str.contains('/')]
+df.astype('str')  # Converting object to string
 
 ##################################################################################################
 """Building DataFrames"""
@@ -165,6 +165,9 @@ users = pd.DataFrame(df)
 df.append(df2)
 
 df.rename(index=str, columns={"A": "a", "C": "c"})
+
+pd.get_dummies(df['a'])
+df.drop(['a'], axis=1)
 
 ##################################################################################################
 """Writing DataFrames"""
@@ -227,6 +230,9 @@ names = ['preg', 'plas', 'pres', 'skin', 'test', 'mass', 'pedi', 'age', 'class']
 data = pandas.read_csv(url, names=names)
 scatter_matrix(data)
 plt.show()
+
+df = df.copy() #it makes a fresh new object 
+df = df #referencing to the same object 
 
 ##################################################################################################
 """Time Series"""

@@ -1,3 +1,2 @@
-
 select all variables : alt + f3
 select next instance of the variables : ctr + D
