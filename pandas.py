@@ -27,6 +27,7 @@ y = df.iloc[:, 3].values
 ##################################################################################################
 """Preprocessing"""
 df.isna().sum() #counting missing data 
+df.isnul().sum()
 df.notnull().all() #removing all the not nulls
 df.dropna(how='any') #using any startegy
 #if in the dataframe can interpolate using this script and spline = polynomial
