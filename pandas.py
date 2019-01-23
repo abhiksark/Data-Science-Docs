@@ -71,6 +71,9 @@ df['column'].quantile(q) # q ~ 0 / 1
 df['column'].unique()
 df.nunique() # this returns the number of unique values in each column
 
+df.infer_objects() # For converting columns of a DataFrame that have an object datatype to a more specific type (soft conversions).
+df["a"] = df.a.astype(np.float16)
+
 
 df[df.column == df.column.max()]  #select rows which has maximum value
 
@@ -90,6 +93,8 @@ df.loc[~df['column_name'].isin(some_values)] #isin returns a boolean Series, so 
 df_a = df.query('income == " >50K"') #life saviour
 df_sample = df.sample(200)
 
+
+df['column'].value_counts()
 ##################################################################################################
 """Pandas Series"""
 
