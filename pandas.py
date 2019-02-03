@@ -22,8 +22,6 @@ X = df.iloc[:, :-1].values
 y = df.iloc[:, 3].values
 
 
-
-
 ##################################################################################################
 """Preprocessing"""
 df.isna().sum() #counting missing data 
@@ -109,6 +107,7 @@ Key building blocks
 prices = [10.70, 10.86, 10.74, 10.71, 10.79]
 shares = pd.Series(prices)
 print(shares)
+
 """
 Output
 0    10.70
@@ -152,9 +151,7 @@ df = {'weekday': ['Sun', 'Sun', 'Mon', 'Mon'],
 
 users = pd.DataFrame(df)
 
-
 df.reset_index(drop=True, inplace=True)
-
 
 #method 2
 cities = ['Austin', 'Dallas', 'Austin', 'Dallas']
@@ -169,9 +166,7 @@ users = pd.DataFrame(df)
 
 
 df.append(df2)
-
 df.rename(index=str, columns={"A": "a", "C": "c"})
-
 pd.get_dummies(df['a'])
 df.drop(['a'], axis=1)
 
@@ -261,3 +256,5 @@ df.reindex(evening_2_11, method='ffill') #method='bfill'
 daily_mean = df.resample('D').mean()
 
 ##################################################################################################
+"""Data Types"""
+df.select_dtypes(exclude=[np.number]).isnull().sum()
